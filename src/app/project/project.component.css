@@ -4,7 +4,8 @@
     border-radius: 3px;
     box-shadow: 3px 3px 2px #ccc;
     margin: 20px 0;
-    padding: 20px;
+/*     padding: 20px; */
+/*     transition: border-color 0.5s ease-out; */
 }
 
 .form-control{
@@ -17,11 +18,13 @@
     margin-right: 10px;
 }
 
-:host(.marked){
+/* :host(.marked){
     padding: 19px;
 }
+ */
 
 :host(.inactive){
     opacity: 0.2;
     color : #ccc;
+    transition: all 0.2s ease-in-out;
 }
