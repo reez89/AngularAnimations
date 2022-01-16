@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { markedTrigger } from '../animations';
+import { Component, OnInit, HostBinding} from '@angular/core';
+import { itemStateTrigger, listStateTrigger, markedTrigger, slideStateTrigger } from '../animations';
+import { AnimationEvent } from "@angular/animations";
 
 import { Project } from './project.model';
 
 import { ProjectsService } from './projects.service';
+import { routeFadeStateTrigger, routeSlideStateTrigger } from '../shared/route-animations';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
   styleUrls: ['./projects.component.css'],
-  animations:[markedTrigger]
+  animations:[
+    markedTrigger, 
+    itemStateTrigger,
+    slideStateTrigger,
+    // routeFadeStateTrigger,
+    routeSlideStateTrigger, 
+    listStateTrigger]
 })
 export class ProjectsComponent implements OnInit {
   projects: Project[] = [];
@@ -17,6 +25,7 @@ export class ProjectsComponent implements OnInit {
   progress = 'progressing';
   createNew = false;
   isLoading = false;
+  @HostBinding('@routeSlideState') routeSlideAnimation = true;
 
   constructor(private prjService: ProjectsService) { }
 
@@ -42,6 +51,9 @@ export class ProjectsComponent implements OnInit {
 
   onProjectCreated(project: Project) {
     this.createNew = false;
-    this.projects.push(project);
+    setTimeout(() => {
+      this.projects.unshift(project);
+    }, 300)
   }
+
 }
